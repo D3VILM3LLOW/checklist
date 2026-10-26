@@ -1,0 +1,159 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --font-hand: 'Gaegu', 'Patrick Hand', cursive;
+    --font-script: 'Architects Daughter', cursive;
+  }
+  
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+  }
+}
+
+.font-hand {
+  font-family: 'Gaegu', 'Patrick Hand', cursive, sans-serif;
+}
+
+.font-architect {
+  font-family: 'Architects Daughter', cursive, sans-serif;
+}
+
+.font-doodle {
+  font-family: 'Patrick Hand', cursive, sans-serif;
+}
+
+/* Light Graph Paper Grid (Normal Mockup Coloring) */
+.wallpaper-grid {
+  background-color: #ededed !important;
+  background-image: 
+    linear-gradient(to right, rgba(160, 165, 175, 0.45) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(160, 165, 175, 0.45) 1px, transparent 1px);
+  background-size: 34px 34px;
+}
+
+/* Inverted Dark Mode Graph Paper Grid (Inverted Negative/Chalkboard) */
+html.dark .wallpaper-grid,
+.dark .wallpaper-grid,
+.dark.wallpaper-grid {
+  background-color: #121212 !important;
+  background-image: 
+    linear-gradient(to right, rgba(240, 240, 240, 0.16) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(240, 240, 240, 0.16) 1px, transparent 1px);
+  background-size: 34px 34px;
+}
+
+/* Paper Shading - Light */
+.paper-wrinkles {
+  background-image: 
+    radial-gradient(ellipse 60% 80% at 30% 40%, rgba(255, 255, 255, 0.4) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 50% at 75% 25%, rgba(0, 0, 0, 0.04) 0%, transparent 70%),
+    radial-gradient(ellipse 80% 60% at 40% 85%, rgba(0, 0, 0, 0.05) 0%, transparent 60%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, transparent 50%, rgba(0, 0, 0, 0.03) 100%);
+  pointer-events: none;
+}
+
+/* Paper Shading - Inverted Dark */
+html.dark .paper-wrinkles,
+.dark .paper-wrinkles {
+  background-image: 
+    radial-gradient(ellipse 60% 80% at 30% 40%, rgba(255, 255, 255, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 50% at 75% 25%, rgba(0, 0, 0, 0.4) 0%, transparent 70%),
+    radial-gradient(ellipse 80% 60% at 40% 85%, rgba(0, 0, 0, 0.45) 0%, transparent 60%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, transparent 50%, rgba(0, 0, 0, 0.35) 100%);
+  pointer-events: none;
+}
+
+/* Hand-drawn bold divider line - Light */
+.hand-drawn-divider {
+  width: 4px;
+  background-color: #171717;
+  border-radius: 2px;
+  box-shadow: 0.5px 0 0.5px rgba(0, 0, 0, 0.3);
+}
+
+/* Hand-drawn bold divider line - Inverted Dark */
+html.dark .hand-drawn-divider,
+.dark .hand-drawn-divider {
+  background-color: #f5f5f4;
+  box-shadow: 0.5px 0 1px rgba(255, 255, 255, 0.2);
+}
+
+/* Minimalist floating window styling - Light */
+.floating-card {
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(8px);
+  border: 2px solid #1c1917;
+  border-radius: 12px;
+  box-shadow: 4px 6px 0px #1c1917;
+}
+
+/* Minimalist floating window styling - Inverted Dark */
+html.dark .floating-card,
+.dark .floating-card {
+  background: rgba(26, 26, 26, 0.96);
+  backdrop-filter: blur(8px);
+  border: 2px solid #f5f5f4;
+  border-radius: 12px;
+  box-shadow: 4px 6px 0px #000000;
+  color: #f5f5f4;
+}
+
+.floating-card-sm {
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(6px);
+  border: 2px solid #1c1917;
+  border-radius: 10px;
+  box-shadow: 3px 4px 0px #1c1917;
+}
+
+html.dark .floating-card-sm,
+.dark .floating-card-sm {
+  background: rgba(26, 26, 26, 0.96);
+  backdrop-filter: blur(6px);
+  border: 2px solid #f5f5f4;
+  border-radius: 10px;
+  box-shadow: 3px 4px 0px #000000;
+  color: #f5f5f4;
+}
+
+/* Neutral Gray Washi Tape (yellow accents become gray) - Light */
+.washi-tape-strip {
+  background: rgba(214, 211, 209, 0.85);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  clip-path: polygon(0% 2%, 99% 0%, 98% 98%, 1% 100%);
+}
+
+/* Neutral Gray Washi Tape - Inverted Dark */
+html.dark .washi-tape-strip,
+.dark .washi-tape-strip {
+  background: rgba(115, 115, 115, 0.7);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+/* Hand-drawn strike-through */
+.doodle-strike {
+  position: relative;
+}
+
+.doodle-strike::after {
+  content: '';
+  position: absolute;
+  left: -2px;
+  right: -2px;
+  top: 52%;
+  height: 2px;
+  background-color: #78716c;
+  border-radius: 1px;
+  transform: rotate(-0.5deg);
+}
+
+html.dark .doodle-strike::after,
+.dark .doodle-strike::after {
+  background-color: #a8a29e;
+}

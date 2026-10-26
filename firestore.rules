@@ -1,0 +1,39 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Global Safety Net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isValidWallpaper(data) {
+      return data.keys().hasAll(['userId', 'notes', 'tasks', 'darkMode', 'updatedAt']) &&
+             data.userId is string && data.userId.size() <= 128 &&
+             data.notes is string && data.notes.size() <= 10000 &&
+             data.tasks is list && data.tasks.size() <= 500 &&
+             data.darkMode is bool &&
+             data.updatedAt is string;
+    }
+
+    match /wallpapers/{wallpaperId} {
+      allow get: if isSignedIn() && (resource.data.userId == request.auth.uid || wallpaperId == request.auth.uid);
+      allow list: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create: if isSignedIn() && 
+                    request.resource.data.userId == request.auth.uid &&
+                    isValidWallpaper(request.resource.data);
+      allow update: if isSignedIn() && 
+                    resource.data.userId == request.auth.uid &&
+                    request.resource.data.userId == request.auth.uid &&
+                    isValidWallpaper(request.resource.data);
+      allow delete: if isSignedIn() && resource.data.userId == request.auth.uid;
+    }
+  }
+}

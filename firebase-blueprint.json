@@ -1,0 +1,68 @@
+{
+  "entities": {
+    "TaskItem": {
+      "title": "TaskItem",
+      "description": "A single checklist task in the notebook wallpaper",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the task"
+        },
+        "title": {
+          "type": "string",
+          "description": "Task description or title",
+          "maxLength": 200
+        },
+        "completed": {
+          "type": "boolean",
+          "description": "Whether the task is checked off"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp in ISO format"
+        }
+      },
+      "required": ["id", "title", "completed", "createdAt"]
+    },
+    "WallpaperDocument": {
+      "title": "WallpaperDocument",
+      "description": "Synced wallpaper checklist and notepad data across devices",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Owner user ID"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Notes notepad content",
+          "maxLength": 10000
+        },
+        "tasks": {
+          "type": "array",
+          "description": "List of checklist tasks"
+        },
+        "darkMode": {
+          "type": "boolean",
+          "description": "Whether dark mode is enabled"
+        },
+        "soundEnabled": {
+          "type": "boolean",
+          "description": "Whether soft sound is enabled"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Last updated timestamp in ISO format"
+        }
+      },
+      "required": ["userId", "notes", "tasks", "darkMode", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/wallpapers/{wallpaperId}": {
+      "schema": "WallpaperDocument",
+      "description": "Stores user wallpaper checklist and notes synced across devices"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "DoodleDo - Notebook Checklist & Focus Timer",
+  "description": "A fun doodle notebook to-do checklist with task focus timers, synced data, live clock, and an interactive checkbox pie chart that fills up as you finish tasks.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
